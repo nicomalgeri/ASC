@@ -331,7 +331,30 @@ html { scroll-behavior: auto !important; }
       document.documentElement.setAttribute('data-reduce-motion', 'true');
     }
 
-    /* Lazy load fallback removal */
+    
+    /* Clients slider (coverflow) */
+    const swiper = new Swiper('.swiper-container', {
+      effect: 'coverflow',
+      centeredSlides: true,
+      slidesPerView: 'auto',
+      allowTouchMove: true,
+      speed: 1000,
+      loop: true,
+      mousewheel: true,
+      navigation: {
+        nextEl: '.next',
+        prevEl: '.prev',
+      },
+      coverflowEffect: {
+        rotate: 0,
+        stretch: 0,
+        depth: 150,
+        modifier: 1,
+        slideShadows: true,
+      },
+    });
+
+/* Lazy load fallback removal */
     document.querySelectorAll('[loading="lazy"]').forEach((el) => el.removeAttribute('loading'));
 
     /* Assign animations to key elements */
