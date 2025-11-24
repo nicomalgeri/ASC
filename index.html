@@ -427,13 +427,6 @@ html { scroll-behavior: auto !important; }
     window.addEventListener('resize', updateUnderline);
     updateActiveSection();
 
-    /* Clients marquee build */
-    document.querySelectorAll('.swiper-wrapper').forEach((wrapper) => {
-      const clone = wrapper.innerHTML;
-      wrapper.innerHTML = clone + clone;
-      wrapper.classList.add('logo-marquee');
-    });
-
     /* Testimonials carousel */
     const testimonials = Array.from(
       document.querySelectorAll('.testimonial1, .testimonial2, .testimonial3, .testimonial4')
