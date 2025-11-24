@@ -15,6 +15,10 @@ body > section:first-of-type {
   color: #fff;
 }
 
+#clients {
+  scroll-margin-top: 110px;
+}
+
 /* ------------ Custom motion + UI polish ------------ */
 :root {
   --nav-bg: rgba(6, 6, 12, 0.92);
@@ -10721,4 +10725,260 @@ textarea.w-input, textarea.w-select {
   font-weight: 400;
   font-style: normal;
   font-display: swap;
+}
+
+/* ===== Base scroll animations ===== */
+
+[data-animate] {
+  opacity: 0;
+  transform: translateY(24px);
+  transition:
+    opacity 0.5s ease-out,
+    transform 0.5s ease-out;
+  will-change: opacity, transform;
+}
+
+[data-animate="fade-in"] {
+  transform: translateY(0);
+}
+
+[data-animate="slide-left"] {
+  transform: translateX(32px);
+}
+
+[data-animate].is-visible {
+  opacity: 1;
+  transform: translateX(0) translateY(0);
+}
+
+/* Respect reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  [data-animate] {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+  }
+}
+
+/* ===== Sticky premium navbar ===== */
+
+.asc-nav {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 40px;
+  transition:
+    background-color 0.35s ease,
+    box-shadow 0.35s ease,
+    backdrop-filter 0.35s ease,
+    padding 0.35s ease;
+}
+
+.asc-nav--scrolled {
+  background: rgba(0, 5, 15, 0.92);
+  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.35);
+  backdrop-filter: blur(16px);
+  padding: 10px 40px;
+}
+
+/* ===== Nav links + active underline ===== */
+
+.asc-nav__link {
+  position: relative;
+  margin-left: 24px;
+  font-size: 0.9rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #f5f5f5;
+  text-decoration: none;
+  opacity: 0.9;
+  transition:
+    opacity 0.25s ease,
+    transform 0.25s ease;
+}
+
+.asc-nav__link::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  bottom: -6px;
+  width: 0;
+  height: 2px;
+  background: #1c8ce0; /* ASC blue */
+  border-radius: 999px;
+  transform: translateX(-50%);
+  transition: width 0.25s ease;
+}
+
+.asc-nav__link:hover {
+  opacity: 1;
+  transform: translateY(-1px);
+}
+
+.asc-nav__link.is-active::after {
+  width: 80%;
+}
+
+/* ===== Buttons – subtle but premium ===== */
+
+.button,
+button,
+a.button-primary {
+  position: relative;
+  overflow: hidden;
+  transform: translateZ(0);
+  transition:
+    transform 0.18s ease,
+    box-shadow 0.18s ease,
+    background-color 0.18s ease;
+}
+
+.button:hover,
+button:hover,
+a.button-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.35);
+}
+
+/* Quick highlight “shine” on hover for primary CTAs */
+.button-primary::before,
+a.button-primary::before {
+  content: "";
+  position: absolute;
+  top: -50%;
+  left: -30%;
+  width: 40%;
+  height: 200%;
+  background: linear-gradient(
+    120deg,
+    rgba(255, 255, 255, 0) 0%,
+    rgba(255, 255, 255, 0.55) 50%,
+    rgba(255, 255, 255, 0) 100%
+  );
+  transform: translateX(-120%);
+  pointer-events: none;
+}
+
+.button-primary:hover::before,
+a.button-primary:hover::before {
+  animation: asc-button-shine 0.7s forwards;
+}
+
+@keyframes asc-button-shine {
+  to {
+    transform: translateX(260%);
+  }
+}
+
+/* ===== Service cards – hover lift ===== */
+
+.service-card {
+  border-radius: 18px;
+  padding: 24px 22px;
+  background: rgba(4, 10, 24, 0.9);
+  border: 1px solid rgba(255, 255, 255, 0.04);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
+  transition:
+    transform 0.25s ease,
+    box-shadow 0.25s ease,
+    border-color 0.25s ease;
+}
+
+.service-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 22px 60px rgba(0, 0, 0, 0.4);
+  border-color: rgba(28, 140, 224, 0.7); /* ASC blue glow */
+}
+
+/* ===== Clients logo strip – marquee feel ===== */
+
+.clients-strip {
+  overflow: hidden;
+  position: relative;
+}
+
+.clients-strip__track {
+  display: flex;
+  align-items: center;
+  gap: 40px;
+  animation: asc-marquee 28s linear infinite;
+}
+
+.clients-strip:hover .clients-strip__track {
+  animation-play-state: paused;
+}
+
+.clients-strip__logo {
+  filter: grayscale(100%);
+  opacity: 0.7;
+  transition:
+    filter 0.25s ease,
+    opacity 0.25s ease,
+    transform 0.25s ease;
+}
+
+.clients-strip__logo:hover {
+  filter: grayscale(0%);
+  opacity: 1;
+  transform: scale(1.05);
+}
+
+@keyframes asc-marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+/* ===== Testimonials – main card style (logic in JS) ===== */
+
+.testimonials {
+  position: relative;
+}
+
+.testimonial-card {
+  opacity: 0;
+  transform: translateY(18px);
+  transition:
+    opacity 0.4s ease,
+    transform 0.4s ease;
+  position: absolute;
+  inset: 0;
+}
+
+.testimonial-card.is-active {
+  opacity: 1;
+  transform: translateY(0);
+  position: relative;
+}
+
+.testimonial-dots {
+  display: flex;
+  gap: 8px;
+  justify-content: center;
+  margin-top: 18px;
+}
+
+.testimonial-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  background: transparent;
+  cursor: pointer;
+  transition:
+    background-color 0.2s ease,
+    transform 0.2s ease,
+    border-color 0.2s ease;
+}
+
+.testimonial-dot.is-active {
+  background: #1c8ce0;
+  border-color: #1c8ce0;
+  transform: scale(1.3);
 }
