@@ -23,3 +23,8 @@ npm run dev   # serves the site on http://localhost:8000
 
 ## Deployment
 There is no build step. Any static host (GitHub Pages, Netlify, Vercel, S3/CloudFront, etc.) can serve the files by pointing the host to the repo root or uploading `index.html` plus the `assets/` directory.
+
+### GitHub Pages
+- Pages deploys from the repository root (`main` branch). All assets, CSS, and JS live in the root `assets/` directory alongside `index.html`.
+- `.nojekyll` is present so GitHub Pages serves everything as plain static files.
+- If port 8000 is in use locally, you can run `npx http-server -p 8001 .` and browse http://localhost:8001.
