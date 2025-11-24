@@ -62,37 +62,12 @@ html[data-reduce-motion="true"] * {
 .section-8 {
   position: relative;
   overflow: hidden;
+  background: #000;
+  color: #fff;
 }
 
 .section-8::before {
-  content: "";
-  position: absolute;
-  inset: -20%;
-  background: radial-gradient(120% 120% at 20% 20%, rgba(209, 176, 124, 0.18), transparent),
-    radial-gradient(120% 120% at 80% 0%, rgba(153, 204, 255, 0.14), transparent),
-    radial-gradient(140% 140% at 50% 80%, rgba(255, 255, 255, 0.08), transparent);
-  animation: heroGradient 26s ease-in-out infinite alternate;
-  z-index: 0;
-}
-
-.section-8 > * {
-  position: relative;
-  z-index: 1;
-}
-
-@keyframes heroGradient {
-  0% {
-    transform: scale(1) translate3d(0, 0, 0);
-    filter: hue-rotate(0deg);
-  }
-  50% {
-    transform: scale(1.03) translate3d(0, -12px, 0);
-    filter: hue-rotate(8deg);
-  }
-  100% {
-    transform: scale(1.06) translate3d(0, 12px, 0);
-    filter: hue-rotate(-6deg);
-  }
+  content: none;
 }
 
 .navbar_wrapper {
