@@ -188,42 +188,6 @@ html[data-reduce-motion="true"] * {
   transform: translateX(0);
 }
 
-/* Clients marquee */
-.logo-marquee {
-  display: flex;
-  gap: clamp(24px, 3vw, 48px);
-  align-items: center;
-  animation: marquee 35s linear infinite;
-  width: max-content;
-}
-
-.logo-marquee:hover {
-  animation-play-state: paused;
-}
-
-.logo-marquee .swiper-slide {
-  width: auto !important;
-  flex: 0 0 auto;
-  filter: grayscale(1);
-  opacity: 0.85;
-  transition: transform 220ms ease, filter 220ms ease, opacity 220ms ease;
-}
-
-.logo-marquee .swiper-slide:hover {
-  filter: grayscale(0);
-  opacity: 1;
-  transform: scale(1.05);
-}
-
-@keyframes marquee {
-  0% {
-    transform: translateX(0);
-  }
-  100% {
-    transform: translateX(-50%);
-  }
-}
-
 /* Testimonials carousel */
 .testimonial1,
 .testimonial2,
